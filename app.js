@@ -42,22 +42,27 @@ function switchPlayers() {
   }
 }
 
-// Here we are defining some helper functions which will check
-// for wins, and update our gameState.winner property accordingly
+// Helper functions to check different winning combos
 
 function checkRows() {
+  // loop through the board to find our row
   for (let i = 0; i < gameState.board.length; i++) {
+    // check if all elements in the row are the same
     if (
       gameState.board[i][0] === gameState.board[i][1] &&
       gameState.board[i][1] === gameState.board[i][2]
     ) {
+      // update our winner property!
       gameState.winner = gameState.board[i][0]
     }
   }
 }
 
 function checkCols() {
+  // loop through the board again
   for (let i = 0; i < gameState.board.length; i++) {
+    // this time we reverse the indexes so that the row increases
+    // but the column stays the same on each loop
     if (
       gameState.board[0][i] === gameState.board[1][i] &&
       gameState.board[1][i] === gameState.board[2][i]
@@ -68,6 +73,8 @@ function checkCols() {
 }
 
 function checkDiag() {
+  // the only completely hardcoded check, using the
+  // exact coordinates of the two diagonals
   if (
     gameState.board[0][0] === gameState.board[1][1] &&
     gameState.board[1][1] === gameState.board[2][2]
@@ -97,13 +104,15 @@ function checkWin() {
   }
 }
 
-// A helper function which handles placing a player in state
-// and renders the correct player accordingly
+// A helper function which handles placing a player in state,
+// then rendering the page accordingly
 function playMoveById(id, event) {
   const row = id[0]
   const column = id[2]
-  gameState.board[row][column] = gameState.currentPlayer
-  event.target.innerText = gameState.board[row][column]
+  if (gameState.board[row][column] === null) {
+    gameState.board[row][column] = gameState.currentPlayer
+    event.target.innerText = gameState.board[row][column]
+  }
 }
 
 // Our main click handler which brings all of our game logic together!
