@@ -1,5 +1,5 @@
 # Simple Tic Tac Toe
 
-#### A bare bones version of tic tac toe, which console.log()'s the winner to the page
+#### A bare bones version of tic tac toe, which console.log()'s the winner
 
 #### P.S. Functions are fun!
