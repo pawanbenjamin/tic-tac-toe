@@ -112,6 +112,8 @@ function playMoveById(id, event) {
   if (gameState.board[row][column] === null) {
     gameState.board[row][column] = gameState.currentPlayer
     event.target.innerText = gameState.board[row][column]
+    // Switch Players here so that the current player can click in a valid space
+    switchPlayers()
   }
 }
 
@@ -119,7 +121,6 @@ function playMoveById(id, event) {
 function handleClick(event) {
   const id = event.target.id
   playMoveById(id, event)
-  switchPlayers()
   checkBoard()
   checkWin()
 }
