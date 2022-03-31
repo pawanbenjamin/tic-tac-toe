@@ -99,7 +99,7 @@ function checkBoard() {
 
 // Because our checkBoard function resets a value in state,
 // this next function can just read that value and act accordingly
-function checkWin() {
+function checkWinOrDraw() {
   if (gameState.winner) {
     console.log(`${gameState.winner} wins the game!`)
   }
