@@ -164,14 +164,16 @@ function renderBoard() {
 
 // Our main click handler which brings all of our game logic together!
 function handleClick(event) {
-  const id = event.target.id
-  playMoveById(id)
-  renderBoard()
-  checkBoard()
-  if (gameState.computer) {
-    playComputerMove()
+  if (!gameState.winner && !gameState.isDraw) {
+    const id = event.target.id
+    playMoveById(id)
     renderBoard()
     checkBoard()
+    if (gameState.computer) {
+      playComputerMove()
+      renderBoard()
+      checkBoard()
+    }
   }
 }
 
