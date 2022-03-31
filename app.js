@@ -1,8 +1,12 @@
 // Make a reference to DOM Element(s)
 const board = document.getElementById('board')
+const onePlayer = document.getElementById('1p')
+const twoPlayer = document.getElementById('2p')
 
 // This will hold all of our game's changing data
 const gameState = {
+  computer: false,
+  isDraw: false,
   currentPlayer: 'X',
   winner: null,
   board: [
@@ -89,20 +93,37 @@ function checkDiag() {
   }
 }
 
+function checkDraw() {
+  const nulls = []
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (gameState.board[i][j] === null) {
+        nulls.push(null)
+      }
+    }
+  }
+  if (nulls.length === 0) {
+    gameState.isDraw = true
+  }
+}
+
+// Because our checkBoard function resets a value in state,
+// this next function can just read that value and act accordingly
+function logWinOrDraw() {
+  if (gameState.winner) {
+    console.log(`${gameState.winner} wins the game!`)
+  } else if (gameState.isDraw) {
+    console.log(`We have a draw!`)
+  }
+}
 // We these powers combined we can write a function
 // which checks the whole board
 function checkBoard() {
   checkRows()
   checkCols()
   checkDiag()
-}
-
-// Because our checkBoard function resets a value in state,
-// this next function can just read that value and act accordingly
-function checkWinOrDraw() {
-  if (gameState.winner) {
-    console.log(`${gameState.winner} wins the game!`)
-  }
+  checkDraw()
+  logWinOrDraw()
 }
 
 // A helper function which handles placing a player in state,
@@ -115,6 +136,21 @@ function playMoveById(id) {
     // Switch Players here so that the current player can click in a valid space
     switchPlayers()
   }
+}
+
+function playComputerMove() {
+  const openSpaces = []
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (gameState.board[i][j] === null) {
+        openSpaces.push([i, j])
+      }
+    }
+  }
+  const randomIndex = Math.floor(Math.random() * openSpaces.length)
+  const [i, j] = openSpaces[randomIndex]
+  gameState.board[i][j] = gameState.currentPlayer
+  switchPlayers()
 }
 
 function renderBoard() {
@@ -130,11 +166,22 @@ function renderBoard() {
 function handleClick(event) {
   const id = event.target.id
   playMoveById(id)
-  console.log(gameState)
   renderBoard()
   checkBoard()
-  checkWin()
+  if (gameState.computer) {
+    playComputerMove()
+    renderBoard()
+    checkBoard()
+  }
 }
 
 // Add an event listener to our board
 board.addEventListener('click', handleClick)
+onePlayer.addEventListener('click', () => {
+  gameState.computer = true
+  console.log(gameState)
+})
+twoPlayer.addEventListener('click', () => {
+  gameState.computer = false
+  console.log(gameState)
+})
