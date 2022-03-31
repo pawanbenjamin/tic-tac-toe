@@ -3,7 +3,6 @@ const board = document.getElementById('board')
 
 // This will hold all of our game's changing data
 const gameState = {
-  computer: false,
   currentPlayer: 'X',
   winner: null,
   board: [
@@ -131,9 +130,10 @@ function renderBoard() {
 function handleClick(event) {
   const id = event.target.id
   playMoveById(id)
+  console.log(gameState)
   renderBoard()
   checkBoard()
-  console.log(gameState)
+  checkWin()
 }
 
 // Add an event listener to our board
