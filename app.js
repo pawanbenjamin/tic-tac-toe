@@ -2,9 +2,10 @@
 const board = document.getElementById('board')
 const onePlayer = document.getElementById('1p')
 const twoPlayer = document.getElementById('2p')
+const reset = document.getElementById('reset')
 
 // This will hold all of our game's changing data
-const gameState = {
+let gameState = {
   computer: false,
   isDraw: false,
   currentPlayer: 'X',
@@ -169,7 +170,7 @@ function handleClick(event) {
     playMoveById(id)
     renderBoard()
     checkBoard()
-    if (gameState.computer) {
+    if (gameState.computer && !gameState.winner && !gameState.isDraw) {
       playComputerMove()
       renderBoard()
       checkBoard()
@@ -186,4 +187,18 @@ onePlayer.addEventListener('click', () => {
 twoPlayer.addEventListener('click', () => {
   gameState.computer = false
   console.log(gameState)
+})
+reset.addEventListener('click', () => {
+  gameState = {
+    computer: false,
+    isDraw: false,
+    currentPlayer: 'X',
+    winner: null,
+    board: [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ],
+  }
+  renderBoard()
 })
