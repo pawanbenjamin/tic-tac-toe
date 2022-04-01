@@ -8,9 +8,9 @@ const win = document.getElementById('winner')
 
 let gameState = {
   computer: false,
+  winner: null,
   isDraw: false,
   currentPlayer: 'X',
-  winner: null,
   board: [
     [null, null, null],
     [null, null, null],
@@ -98,11 +98,9 @@ function displayWinOrDraw() {
   if (gameState.winner) {
     turn.innerText = ''
     win.innerText = `${gameState.winner} wins the game!`
-    console.log(`${gameState.winner} wins the game!`)
   } else if (gameState.isDraw) {
     turn.innerText = ''
     win.innerText = `We have a draw!`
-    console.log(`We have a draw!`)
   }
 }
 
