@@ -1,7 +1,7 @@
 #board {
   display: grid;
-  height: 200px;
-  width: 200px;
+  height: 400px;
+  width: 400px;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(3, 1fr);
   background-color: rgb(101, 122, 107);
@@ -10,4 +10,8 @@
 .cell {
   color: rgb(53, 53, 43);
   background-color: aqua;
+}
+
+.hide {
+  display: none;
 }
