@@ -5,4 +5,4 @@
 
 ##### You can use this as a template to build out more functionality!
 
-#### Built with Functions because they are funnnn!
+#### Functions are funnnn!
