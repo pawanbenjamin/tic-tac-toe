@@ -194,4 +194,4 @@ reset.addEventListener("click", () => {
   renderBoard();
 });
 
-console.log("Hello World");
+console.log("I just setup the DB!");
